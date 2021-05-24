@@ -15,3 +15,4 @@ thres_adapt = cv2.adaptiveThreshold(imgGray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C
 hz = np.hstack((imgGray, thres_adapt))
 cv2.imshow("hsv", hz)
 cv2.waitKey(5000)
+cv2.destroyAllWindows()
