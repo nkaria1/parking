@@ -1,7 +1,7 @@
 import cv2
 import numpy as np
 
-img = cv2.imread("Data/detect_blob.png")
+img = cv2.imread("../Data/detect_blob.png")
 print(img.shape)
 img_resize = cv2.resize(img, (200, 200))  # x,y
 
