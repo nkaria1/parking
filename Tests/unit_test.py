@@ -9,7 +9,7 @@ class CarParkingTestCase(unittest.TestCase):
 
         # Print the current working directory
         print("Current working directory: {0}".format(cwd))
-        input = cv2.imread("../Data/detect_blob.png")
+        input = cv2.imread("Data/detect_blob.png")
         expected_output = (760,541,3)
         result = input.shape
         self.assertEqual(expected_output, result)
