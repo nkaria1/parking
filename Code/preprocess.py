@@ -1,18 +1,19 @@
 import cv2
 import numpy as np
+import matplotlib.pyplot as plt
 
-img = cv2.imread("../Data/detect_blob.png")
-print(img.shape)
-img_resize = cv2.resize(img, (200, 200))  # x,y
+file_paths = ['../Data/train/vacant','../Data/train/occupied']
+classes=[0,1]
+for c in classes:
+    for i in range(9):
+        plt.subplot(330 +i +1)
+        filename = file_paths[c] + f"/{c} ({i}).jpg"
+        img=cv2.imread(filename)
+        img_resize = cv2.resize(img, (900, 400))  # x,y
+        color = cv2.cvtColor(img_resize, cv2.COLOR_BGR2RGB)
+        imgGray = cv2.cvtColor(color, cv2.COLOR_RGB2GRAY)
+        imgBlur = cv2.GaussianBlur(imgGray, (5, 5), 0)
+        imgCanny = cv2.Canny(imgBlur, 120, 120)  # edge detection
 
-imgHsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
-hz = np.hstack((img, imgHsv))
-cv2.imshow("hsv", hz)
-cv2.waitKey(5000)
-imgGray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-
-thres_adapt = cv2.adaptiveThreshold(imgGray, 255, cv2.ADAPTIVE_THRESH_GAUSSIAN_C, cv2.THRESH_BINARY, 115, 1)
-hz = np.hstack((imgGray, thres_adapt))
-cv2.imshow("hsv", hz)
-cv2.waitKey(5000)
-cv2.destroyAllWindows()
+        plt.imshow(imgCanny, cmap=plt.cm.gray)
+    plt.show()
